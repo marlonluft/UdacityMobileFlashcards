@@ -1,11 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { createStackNavigator, createAppContainer } from "react-navigation";
+import ListagemBaralhosView from './Views/ListagemBaralhosView.js'
+import BaralhoView from './Views/BaralhoView.js'
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
+        <Text>Home</Text>
+        <Button onPress={() => this.props.navigation.navigate('Baralho')} title="Baralho"/>
+        <Button onPress={() => this.props.navigation.navigate('Listagem')} title="Listagem"/>
       </View>
     );
   }
@@ -19,3 +24,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: App
+  },
+  Listagem: {
+    screen: ListagemBaralhosView
+  },
+  Baralho: {
+    screen: BaralhoView
+  }
+});
+
+export default createAppContainer(AppNavigator);

@@ -1,5 +1,5 @@
-import { Component } from 'react'
-import { View, Text, Platform, StyleSheet } from 'react-native'
+import React, { Component } from 'react'
+import { View, Text, Platform, StyleSheet, Button  } from 'react-native'
 
 class ListagemBaralhosView extends Component {
 
@@ -7,6 +7,7 @@ class ListagemBaralhosView extends Component {
         return (
             <View>
                 <Text>Listagem Baralho</Text>
+                <Button onPress={() => this.props.navigation.navigate('Baralho')} title="Baralho"/>
             </View>
         )
     }
