@@ -7,7 +7,7 @@ class ListagemBaralhosView extends Component {
         return (
             <View>
                 <Text>Listagem Baralho</Text>
-                <Button onPress={() => this.props.navigation.navigate('Baralho')} title="Baralho"/>
+                <Button onPress={() => this.props.navigation.navigate('NovoBaralho')} title="Novo Baralho"/>
             </View>
         )
     }

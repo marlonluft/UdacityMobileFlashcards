@@ -1,41 +1,41 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import ListagemBaralhosView from './Views/ListagemBaralhosView.js'
+import NovoBaralhoView from './Views/NovoBaralhoView.js'
 import BaralhoView from './Views/BaralhoView.js'
-
-class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Home</Text>
-        <Button onPress={() => this.props.navigation.navigate('Baralho')} title="Baralho"/>
-        <Button onPress={() => this.props.navigation.navigate('Listagem')} title="Listagem"/>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
+import NovaPerguntaView from './Views/NovaPerguntaView.js'
+import QuizView from './Views/QuizView.js'
 
 const AppNavigator = createStackNavigator({
-  Home: {
-    screen: App
-  },
   Listagem: {
-    screen: ListagemBaralhosView
+    screen: ListagemBaralhosView,
+    navigationOptions: () => ({
+      title: 'Baralhos',
+    }),
   },
   Baralho: {
-    screen: BaralhoView
-  }
+    screen: BaralhoView,
+    navigationOptions: () => ({
+      title: 'Baralho',
+    }),    
+  },
+  NovaPergunta: {
+    screen: NovaPerguntaView,
+    navigationOptions: () => ({
+      title: 'Nova Pergunta',
+    })
+  },
+  NovoBaralho: {
+    screen: NovoBaralhoView,
+    navigationOptions: () => ({
+      title: 'Novo Baralho',
+    }),
+  },  
+  Quiz: {
+    screen: QuizView,
+    navigationOptions: () => ({
+      title: 'Quiz',
+    }),
+  },
 });
 
 export default createAppContainer(AppNavigator);
