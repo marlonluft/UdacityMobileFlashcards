@@ -26,6 +26,7 @@ class QuizView extends Component {
 
         this.setState(oldstate => ({
             qtdQuestionado: oldstate.qtdQuestionado + 1,
+            exibirPergunta: true
         }))
     }
 
@@ -33,6 +34,7 @@ class QuizView extends Component {
 
         this.setState(oldstate => ({
             qtdQuestionado: oldstate.qtdQuestionado + 1,
+            exibirPergunta: true
         }))
     }
 
@@ -51,8 +53,8 @@ class QuizView extends Component {
 
                 <Button onPress={() => this.setState({ exibirPergunta: !exibirPergunta })} title={exibirPergunta ? 'Exibir Resposta' : 'Exibir Pergunta'} />
 
-                <Button onPress={() => this.acertei()} title="Acertei" />
-                <Button onPress={() => this.errei()} title="Errei" />
+                <Button disabled={exibirPergunta} onPress={() => this.acertei()} title="Acertei" />
+                <Button disabled={exibirPergunta} onPress={() => this.errei()} title="Errei" />
             </View>
         )
     }
