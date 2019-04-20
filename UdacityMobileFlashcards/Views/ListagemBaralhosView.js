@@ -24,7 +24,7 @@ class ListagemBaralhosView extends Component {
         ]
     }
 
-    ExibirBaralho = (id) => {
+    exibirBaralho = (id) => {
         this.props.navigation.navigate('Baralho', { id })
     }
 
@@ -34,7 +34,7 @@ class ListagemBaralhosView extends Component {
                 <Button onPress={() => this.props.navigation.navigate('NovoBaralho')} title="Novo Baralho" />
                 {
                     this.state.Baralhos.map((baralho) => {
-                        return <Baralho key={baralho.id} dados={baralho} ExibirBaralho={() => this.ExibirBaralho} />
+                        return <Baralho key={baralho.id} dados={baralho} exibirBaralho={() => this.exibirBaralho} />
                     })
                 }
             </View>
