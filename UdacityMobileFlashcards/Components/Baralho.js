@@ -1,14 +1,16 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
-export default function Baralho({ dados }) {
-    const { descricao, qtdPerguntas } = dados
+export default function Baralho({ dados, ExibirBaralho }) {
+    const { descricao, qtdPerguntas, id } = dados
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.descricao}>{descricao}</Text>
-            <Text style={styles.perguntas}>{qtdPerguntas > 0 ? qtdPerguntas + ' pergunta(s)' : 'Nenhuma pergunta cadastrada'}</Text>
-        </View>
+        <TouchableOpacity onPress={ExibirBaralho(id)}>
+            <View style={styles.container}>
+                <Text style={styles.descricao}>{descricao}</Text>
+                <Text style={styles.perguntas}>{qtdPerguntas > 0 ? qtdPerguntas + ' pergunta(s)' : 'Nenhuma pergunta cadastrada'}</Text>
+            </View>
+        </TouchableOpacity>
     )
 }
 

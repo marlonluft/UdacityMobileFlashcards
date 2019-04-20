@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Platform, StyleSheet, Button } from 'react-native'
+import { View, StyleSheet, Button } from 'react-native'
 import Baralho from '../Components/Baralho'
 
 class ListagemBaralhosView extends Component {
@@ -24,13 +24,17 @@ class ListagemBaralhosView extends Component {
         ]
     }
 
+    ExibirBaralho = (id) => {
+        this.props.navigation.navigate('Baralho', { id })
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <Button onPress={() => this.props.navigation.navigate('NovoBaralho')} title="Novo Baralho" />
                 {
                     this.state.Baralhos.map((baralho) => {
-                        return <Baralho key={baralho.id} dados={baralho} />
+                        return <Baralho key={baralho.id} dados={baralho} ExibirBaralho={() => this.ExibirBaralho} />
                     })
                 }
             </View>
