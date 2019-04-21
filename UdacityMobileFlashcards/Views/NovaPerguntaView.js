@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
+import { salvarPergunta } from '../Utils/API'
 
 class NovaPerguntaView extends Component {
 
     state = {
         pergunta: '',
         resposta: '',
-        baralhoId: -1
+        baralhoId: ''
     }
 
     componentDidMount() {
@@ -15,7 +16,6 @@ class NovaPerguntaView extends Component {
         this.setState({
             baralhoId: id
         })
-
     }
 
     salvar = () => {
@@ -23,11 +23,25 @@ class NovaPerguntaView extends Component {
         const { pergunta, resposta, baralhoId } = this.state
 
         // Validar os dados
+        if (!pergunta || pergunta.length < 3) {
+            console.log('Hey informe uma pergunta com pelo menos 3 caracteres para continuar')
+        }
+        else if (!resposta || pergunta.length < 1) {
+            console.log('Hey informe uma resposta com pelo menos 1 caracter para continuar')
+        }
+        else {
 
-        // salvar pergunta
+            let perguntaObj = {
+                pergunta,
+                resposta
+            }
 
-        // Redirecionar
-        this.props.navigation.navigate('Listagem')
+            // salvar pergunta
+            salvarPergunta(perguntaObj, baralhoId, () => {
+                // Redirecionar
+                this.props.navigation.goBack(null)
+            })
+        }
     }
 
     render() {

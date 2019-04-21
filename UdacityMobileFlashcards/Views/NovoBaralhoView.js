@@ -11,14 +11,15 @@ class NovoBaralhoView extends Component {
     salvar = () => {
 
         // Validar titulo do baralho
-        if (!this.state.tituloBaralho) {
-            console.log('Hey informe um título do baralho para continuar')
+        if (!this.state.tituloBaralho || this.state.tituloBaralho.length < 3) {
+            console.log('Hey informe um título do baralho com pelo menos 3 caracteres para continuar')
         }
         else {
 
             let baralho = {
                 descricao: this.state.tituloBaralho,
-                qtdPerguntas: 0
+                qtdPerguntas: 0,
+                id: null
             }
 
             // salvar novo baralho e redireciona para tela de listagem

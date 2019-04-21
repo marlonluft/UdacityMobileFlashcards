@@ -29,7 +29,7 @@ export function consultarBaralho(id, callBack) {
 
 export function salvarBaralho(baralho) {
 
-    baralho.id = createUUID()
+    baralho.id = baralho.id || createUUID()
 
     return AsyncStorage.mergeItem(BARALHO_STORAGE_KEY, JSON.stringify({
         [baralho.id]: baralho
@@ -37,12 +37,21 @@ export function salvarBaralho(baralho) {
 }
 
 export function consultarPerguntas(baralhoKey, callBack) {
-    return AsyncStorage.getItem(PERGUNTA_STORAGE_KEY + baralhoKey)
+    AsyncStorage.getItem(PERGUNTA_STORAGE_KEY + baralhoKey)
         .then(callBack)
 }
 
-export function salvarPergunta({ pergunta, key, baralhoKey }) {
-    return AsyncStorage.mergeItem(PERGUNTA_STORAGE_KEY + baralhoKey, JSON.stringify({
-        [key]: pergunta
-    }))
+export function salvarPergunta(pergunta, baralhoId, callBack) {
+
+    pergunta.id = createUUID()
+
+    AsyncStorage.mergeItem(PERGUNTA_STORAGE_KEY + baralhoId, JSON.stringify({
+        [pergunta.id]: pergunta
+    })).then(() => {
+        consultarBaralho(baralhoId, (baralho) => {
+            baralho.qtdPerguntas = baralho.qtdPerguntas + 1
+            salvarBaralho(baralho)
+                .then(callBack)
+        })
+    })
 }
