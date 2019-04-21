@@ -12,7 +12,7 @@ class ListagemBaralhosView extends Component {
     }
 
     componentDidMount() {
-        this.willFocus = this.props.navigation.addListener('willFocus', () => {
+        this.props.navigation.addListener('willFocus', () => {
             consultarBaralhos((baralhos) => {
                 this.setState({
                     Baralhos: baralhos ? JSON.parse(baralhos) : {}
