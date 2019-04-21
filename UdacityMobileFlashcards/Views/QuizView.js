@@ -9,7 +9,8 @@ class QuizView extends Component {
         perguntas: [],
         pergunta: '',
         resposta: '',
-        exibirPergunta: true
+        exibirPergunta: true,
+        qtdCorreta: 0
     }
 
     componentDidMount() {
@@ -41,14 +42,19 @@ class QuizView extends Component {
         })
     }
 
-    acertei = () => {
+    alterarPontuacao = (ehCorreta) => {
 
-        this.proximaPergunta()
-    }
+        if (ehCorreta) {
+            this.setState(oldstate => ({
+                qtdCorreta: oldstate.qtdCorreta + 1
+            }))
+        }
 
-    errei = () => {
-
-        this.proximaPergunta()
+        if (this.state.qtdQuestionado < this.state.perguntas.length)
+        {
+            // Mostra a próxima pergunta
+            this.proximaPergunta()
+        }
     }
 
     render() {
@@ -66,8 +72,8 @@ class QuizView extends Component {
 
                 <Button onPress={() => this.setState({ exibirPergunta: !exibirPergunta })} title={exibirPergunta ? 'Exibir Resposta' : 'Exibir Pergunta'} />
 
-                <Button disabled={exibirPergunta} onPress={() => this.acertei()} title="Acertei" />
-                <Button disabled={exibirPergunta} onPress={() => this.errei()} title="Errei" />
+                <Button disabled={exibirPergunta} onPress={() => this.alterarPontuacao(true)} title="Correta" />
+                <Button disabled={exibirPergunta} onPress={() => this.alterarPontuacao(false)} title="Incorreta" />
             </View>
         )
     }
