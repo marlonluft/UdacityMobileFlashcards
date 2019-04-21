@@ -15,7 +15,7 @@ function createUUID() {
 }
 
 export function consultarBaralhos(callBack) {
-
+    
     return AsyncStorage.getItem(BARALHO_STORAGE_KEY)
         .then((baralhosJSON) => { callBack(JSON.parse(baralhosJSON)) })
 }
@@ -38,7 +38,7 @@ export function salvarBaralho(baralho) {
 
 export function consultarPerguntas(baralhoKey, callBack) {
     AsyncStorage.getItem(PERGUNTA_STORAGE_KEY + baralhoKey)
-        .then(callBack)
+        .then((perguntasJSON) => callBack(JSON.parse(perguntasJSON)))
 }
 
 export function salvarPergunta(pergunta, baralhoId, callBack) {

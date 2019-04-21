@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Button } from 'react-native'
+import { consultarPerguntas } from '../Utils/API'
 
 class QuizView extends Component {
 
     state = {
         qtdQuestionado: 0,
-        qtdTotal: 0,
+        perguntas: [],
         pergunta: '',
         resposta: '',
         exibirPergunta: true
@@ -14,37 +15,49 @@ class QuizView extends Component {
     componentDidMount() {
         const { id } = this.props.navigation.state.params
 
-        this.setState({
-            pergunta: 'Teste pergunta',
-            resposta: 'Teste resposta',
-            qtdTotal: 10
-        })
+        consultarPerguntas(id, (perguntasObj) => {
 
+            var lista = [];
+            Object.keys(perguntasObj).map((perguntaKey) => {
+                lista.push(perguntasObj[perguntaKey])
+            })
+
+            this.setState({
+                perguntas: lista
+            }, () => this.proximaPergunta())
+        })
+    }
+
+    proximaPergunta = () => {
+
+        const { qtdQuestionado, perguntas } = this.state
+        const perguntaObj = perguntas[qtdQuestionado]
+
+        this.setState({
+            pergunta: perguntaObj.pergunta,
+            resposta: perguntaObj.resposta,
+            qtdQuestionado: qtdQuestionado + 1,
+            exibirPergunta: true
+        })
     }
 
     acertei = () => {
 
-        this.setState(oldstate => ({
-            qtdQuestionado: oldstate.qtdQuestionado + 1,
-            exibirPergunta: true
-        }))
+        this.proximaPergunta()
     }
 
     errei = () => {
 
-        this.setState(oldstate => ({
-            qtdQuestionado: oldstate.qtdQuestionado + 1,
-            exibirPergunta: true
-        }))
+        this.proximaPergunta()
     }
 
     render() {
 
-        const { qtdQuestionado, qtdTotal, pergunta, resposta, exibirPergunta } = this.state
+        const { qtdQuestionado, perguntas, pergunta, resposta, exibirPergunta } = this.state
 
         return (
             <View>
-                <Text>{qtdQuestionado + '/' + qtdTotal}</Text>
+                <Text>{qtdQuestionado + '/' + perguntas.length}</Text>
                 {
                     exibirPergunta ?
                         <Text style={{}}>{pergunta}</Text>
