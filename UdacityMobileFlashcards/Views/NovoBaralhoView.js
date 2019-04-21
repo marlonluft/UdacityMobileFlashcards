@@ -21,15 +21,8 @@ class NovoBaralhoView extends Component {
                 qtdPerguntas: 0
             }
 
-            // salvar novo baralho
-            salvarBaralho(baralho).then((retorno) => {
-
-                console.log('retorno')
-                console.log(retorno)
-
-                // Redirecionar
-                this.props.navigation.navigate('Listagem')
-            })
+            // salvar novo baralho e redireciona para tela de listagem
+            salvarBaralho(baralho).then(() => this.props.navigation.navigate('Listagem'))
         }
     }
 
