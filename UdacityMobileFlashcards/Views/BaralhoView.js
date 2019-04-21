@@ -7,7 +7,7 @@ class BaralhoView extends Component {
 
     state = {
         descricao: '',
-        qtdPerguntas: 0,
+        qtdCartas: 0,
         id: '',
         carregado: false
     }
@@ -16,7 +16,7 @@ class BaralhoView extends Component {
         consultarBaralho(this.state.id, (retorno) => {
             this.setState({
                 descricao: retorno.descricao,
-                qtdPerguntas: retorno.qtdPerguntas,
+                qtdCartas: retorno.qtdCartas,
                 carregado: true
             })
         })
@@ -39,7 +39,7 @@ class BaralhoView extends Component {
 
     render() {
 
-        const { descricao, qtdPerguntas, id } = this.state
+        const { descricao, qtdCartas, id } = this.state
 
         if (this.state.carregado === false) {
             return <AppLoading />
@@ -49,9 +49,9 @@ class BaralhoView extends Component {
 
             <View style={styles.container}>
                 <Text style={styles.descricao}>{descricao}</Text>
-                <Text style={styles.perguntas}>{qtdPerguntas > 0 ? qtdPerguntas + ' pergunta(s)' : 'Nenhuma pergunta cadastrada'}</Text>
-                <Button onPress={() => this.props.navigation.navigate('NovaPergunta', { id })} title="Nova Pergunta" />
-                <Button disabled={qtdPerguntas === 0} onPress={() => this.props.navigation.navigate('Quiz', { id })} title="Começar Quiz" />
+                <Text style={styles.cartas}>{qtdCartas > 0 ? qtdCartas + ' carta(s)' : 'Nenhuma carta cadastrada'}</Text>
+                <Button onPress={() => this.props.navigation.navigate('NovaCarta', { id })} title="Nova Carta" />
+                <Button disabled={qtdCartas === 0} onPress={() => this.props.navigation.navigate('Quiz', { id })} title="Começar Quiz" />
             </View>
         )
     }
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 28,
     },
-    perguntas: {
+    cartas: {
         textAlign: 'center',
         fontSize: 20,
         color: 'gray'

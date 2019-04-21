@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Button } from 'react-native'
-import { consultarPerguntas } from '../Utils/API'
+import { consultarCartas } from '../Utils/API'
 import QuizPerguntas from '../Components/QuizPerguntas'
 import QuizResultado from '../Components/QuizResultado'
 
@@ -8,7 +8,7 @@ class QuizView extends Component {
 
     state = {
         qtdQuestionado: 0,
-        perguntas: [],
+        cartas: [],
         pergunta: '',
         resposta: '',
         exibirPergunta: true,
@@ -19,27 +19,27 @@ class QuizView extends Component {
     componentDidMount() {
         const { id } = this.props.navigation.state.params
 
-        consultarPerguntas(id, (perguntasObj) => {
+        consultarCartas(id, (cartasObj) => {
 
             var lista = [];
-            Object.keys(perguntasObj).map((perguntaKey) => {
-                lista.push(perguntasObj[perguntaKey])
+            Object.keys(cartasObj).map((cartaKey) => {
+                lista.push(cartasObj[cartaKey])
             })
 
             this.setState({
-                perguntas: lista
-            }, () => this.proximaPergunta())
+                cartas: lista
+            }, () => this.proximaCarta())
         })
     }
 
-    proximaPergunta = () => {
+    proximaCarta = () => {
 
-        const { qtdQuestionado, perguntas } = this.state
-        const perguntaObj = perguntas[qtdQuestionado]
+        const { qtdQuestionado, cartas } = this.state
+        const cartaObj = cartas[qtdQuestionado]
 
         this.setState({
-            pergunta: perguntaObj.pergunta,
-            resposta: perguntaObj.resposta,
+            pergunta: cartaObj.pergunta,
+            resposta: cartaObj.resposta,
             qtdQuestionado: qtdQuestionado + 1,
             exibirPergunta: true
         })
@@ -53,7 +53,7 @@ class QuizView extends Component {
             }))
         }
 
-        if (this.state.qtdQuestionado < this.state.perguntas.length) {
+        if (this.state.qtdQuestionado < this.state.cartas.length) {
             // Mostra a próxima pergunta
             this.proximaPergunta()
         }
@@ -80,12 +80,12 @@ class QuizView extends Component {
             exibirPergunta: true,
             qtdCorreta: 0,
             exibirResultado: false
-        }, () => this.proximaPergunta())
+        }, () => this.proximaCarta())
     }
 
     render() {
 
-        const { qtdQuestionado, perguntas, pergunta, resposta, exibirPergunta, exibirResultado, qtdCorreta } = this.state
+        const { qtdQuestionado, cartas, pergunta, resposta, exibirPergunta, exibirResultado, qtdCorreta } = this.state
 
         return (
             <View>
@@ -93,12 +93,12 @@ class QuizView extends Component {
                     (exibirResultado) ?
                         <QuizResultado
                             qtdAcertos={qtdCorreta}
-                            qtdTotal={perguntas.length}
+                            qtdTotal={cartas.length}
                             recomecarQuiz={this.recomecarQuiz}
                             voltarBaralho={() => this.props.navigation.goBack(null)} /> :
                         <QuizPerguntas
                             qtdQuestionado={qtdQuestionado}
-                            qtdPerguntas={perguntas.length}
+                            qtdPerguntas={cartas.length}
                             exibirPergunta={exibirPergunta}
                             pergunta={pergunta}
                             resposta={resposta}

@@ -2,13 +2,13 @@ import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 export default function Baralho({ dados, exibirBaralho }) {
-    const { descricao, qtdPerguntas, id } = dados
+    const { descricao, qtdCartas, id } = dados
 
     return (
         <TouchableOpacity onPress={() => exibirBaralho(id)}>
             <View style={styles.container}>
                 <Text style={styles.descricao}>{descricao}</Text>
-                <Text style={styles.perguntas}>{qtdPerguntas > 0 ? qtdPerguntas + ' pergunta(s)' : 'Nenhuma pergunta cadastrada'}</Text>
+                <Text style={styles.cartas}>{qtdCartas > 0 ? qtdCartas + ' carta(s)' : 'Nenhuma carta cadastrada'}</Text>
             </View>
         </TouchableOpacity>
     )
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 18,
     },
-    perguntas: {
+    cartas: {
         textAlign: 'center',
         fontSize: 14,
         color: 'gray'

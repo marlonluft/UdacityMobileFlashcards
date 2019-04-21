@@ -18,7 +18,7 @@ const AppNavigator = createStackNavigator({
       title: 'Baralho',
     }),    
   },
-  NovaPergunta: {
+  NovaCarta: {
     screen: NovaCartaView,
     navigationOptions: () => ({
       title: 'Nova Carta',

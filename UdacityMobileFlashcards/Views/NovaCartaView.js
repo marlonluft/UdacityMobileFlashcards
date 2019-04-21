@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
-import { salvarPergunta } from '../Utils/API'
+import { salvarCarta } from '../Utils/API'
 
 class NovaCartaView extends Component {
 
@@ -31,13 +31,13 @@ class NovaCartaView extends Component {
         }
         else {
 
-            let perguntaObj = {
+            let cartaObj = {
                 pergunta,
                 resposta
             }
 
-            // salvar pergunta
-            salvarPergunta(perguntaObj, baralhoId, () => {
+            // salvar a carta
+            salvarCarta(cartaObj, baralhoId, () => {
                 // Redirecionar
                 this.props.navigation.goBack(null)
             })

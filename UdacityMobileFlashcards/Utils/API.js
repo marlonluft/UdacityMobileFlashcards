@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native'
 
 const BARALHO_STORAGE_KEY = 'UdacityMobileFlashcards:baralho'
-const PERGUNTA_STORAGE_KEY = 'UdacityMobileFlashcards:pergunta'
+const CARTA_STORAGE_KEY = 'UdacityMobileFlashcards:carta'
 
 // Gera id para os novos registros.
 function createUUID() {
@@ -36,20 +36,20 @@ export function salvarBaralho(baralho) {
     }))
 }
 
-export function consultarPerguntas(baralhoKey, callBack) {
-    AsyncStorage.getItem(PERGUNTA_STORAGE_KEY + baralhoKey)
-        .then((perguntasJSON) => callBack(JSON.parse(perguntasJSON)))
+export function consultarCartas(baralhoKey, callBack) {
+    AsyncStorage.getItem(CARTA_STORAGE_KEY + baralhoKey)
+        .then((cartasJSON) => callBack(JSON.parse(cartasJSON)))
 }
 
-export function salvarPergunta(pergunta, baralhoId, callBack) {
+export function salvarCarta(carta, baralhoId, callBack) {
 
-    pergunta.id = createUUID()
+    carta.id = createUUID()
 
-    AsyncStorage.mergeItem(PERGUNTA_STORAGE_KEY + baralhoId, JSON.stringify({
-        [pergunta.id]: pergunta
+    AsyncStorage.mergeItem(CARTA_STORAGE_KEY + baralhoId, JSON.stringify({
+        [carta.id]: carta
     })).then(() => {
         consultarBaralho(baralhoId, (baralho) => {
-            baralho.qtdPerguntas = baralho.qtdPerguntas + 1
+            baralho.qtdCartas = baralho.qtdCartas + 1
             salvarBaralho(baralho)
                 .then(callBack)
         })
