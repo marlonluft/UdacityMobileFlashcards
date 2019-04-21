@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Button } from 'react-native'
 import { consultarPerguntas } from '../Utils/API'
-import Quiz from '../Components/Quiz'
+import QuizPerguntas from '../Components/QuizPerguntas'
 
 class QuizView extends Component {
 
@@ -11,7 +11,8 @@ class QuizView extends Component {
         pergunta: '',
         resposta: '',
         exibirPergunta: true,
-        qtdCorreta: 0
+        qtdCorreta: 0,
+        exibirResultado: false
     }
 
     componentDidMount() {
@@ -55,6 +56,13 @@ class QuizView extends Component {
             // Mostra a próxima pergunta
             this.proximaPergunta()
         }
+        else {
+            // Exibe o resultado do quiz
+            this.setState({
+                exibirResultado: true
+            })
+
+        }
     }
 
     alterarExibicao = () => {
@@ -65,18 +73,23 @@ class QuizView extends Component {
 
     render() {
 
-        const { qtdQuestionado, perguntas, pergunta, resposta, exibirPergunta } = this.state
+        const { qtdQuestionado, perguntas, pergunta, resposta, exibirPergunta, exibirResultado } = this.state
 
         return (
             <View>
-                <Quiz
-                    qtdQuestionado={qtdQuestionado}
-                    qtdPerguntas={perguntas.length}
-                    exibirPergunta={exibirPergunta}
-                    pergunta={pergunta}
-                    resposta={resposta}
-                    alterarPontuacao={this.alterarPontuacao}
-                    alterarExibicao={this.alterarExibicao} />
+                {
+                    (exibirResultado) ?
+                        <Text></Text> :
+                        <QuizPerguntas
+                            qtdQuestionado={qtdQuestionado}
+                            qtdPerguntas={perguntas.length}
+                            exibirPergunta={exibirPergunta}
+                            pergunta={pergunta}
+                            resposta={resposta}
+                            alterarPontuacao={this.alterarPontuacao}
+                            alterarExibicao={this.alterarExibicao} />
+
+                }
             </View>
         )
     }

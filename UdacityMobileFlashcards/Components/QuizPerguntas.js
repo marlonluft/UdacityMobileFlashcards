@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, Button } from 'react-native'
 
-export default function Quiz({ qtdQuestionado, qtdPerguntas, exibirPergunta, pergunta, resposta, alterarPontuacao, alterarExibicao }) {
+export default function QuizPerguntas({ qtdQuestionado, qtdPerguntas, exibirPergunta, pergunta, resposta, alterarPontuacao, alterarExibicao }) {
 
     return (
         <View>
