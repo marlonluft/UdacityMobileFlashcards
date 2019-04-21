@@ -2,10 +2,10 @@ import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 export default function Baralho({ dados, exibirBaralho }) {
-    const { descricao, qtdPerguntas, id } = dados
+    const { descricao, qtdPerguntas } = dados
 
     return (
-        <TouchableOpacity onPress={exibirBaralho(id)}>
+        <TouchableOpacity onPress={() => exibirBaralho(dados)}>
             <View style={styles.container}>
                 <Text style={styles.descricao}>{descricao}</Text>
                 <Text style={styles.perguntas}>{qtdPerguntas > 0 ? qtdPerguntas + ' pergunta(s)' : 'Nenhuma pergunta cadastrada'}</Text>

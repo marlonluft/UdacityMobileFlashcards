@@ -21,8 +21,8 @@ class ListagemBaralhosView extends Component {
         })
     }
 
-    exibirBaralho = (id) => {
-        this.props.navigation.navigate('Baralho', { id })
+    exibirBaralho = (baralhoObj) => {
+        this.props.navigation.navigate('Baralho', { baralhoObj })
     }
 
     render() {
@@ -42,7 +42,7 @@ class ListagemBaralhosView extends Component {
                         <Text style={styles.nenhumCadastrado}>Nenhum baralho cadastrado.</Text>
                     ) :
                         Object.keys(Baralhos).map((id) => {
-                            return <Baralho key={id} dados={Baralhos[id]} exibirBaralho={() => this.exibirBaralho} />
+                            return <Baralho key={id} dados={Baralhos[id]} exibirBaralho={this.exibirBaralho} />
                         })
                 }
             </View>

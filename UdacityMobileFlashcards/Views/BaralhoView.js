@@ -10,12 +10,12 @@ class BaralhoView extends Component {
     }
 
     componentDidMount() {
-        const { id } = this.props.navigation.state.params
+        const { baralhoObj } = this.props.navigation.state.params
 
         this.setState({
-            descricao: 'Baralho View',
-            qtdPerguntas: 2,
-            id: id
+            descricao: baralhoObj.descricao,
+            qtdPerguntas: baralhoObj.qtdPerguntas,
+            id: baralhoObj.id
         })
 
     }
