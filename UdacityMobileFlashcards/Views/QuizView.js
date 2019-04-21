@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, Button } from 'react-native'
 import { consultarPerguntas } from '../Utils/API'
 import QuizPerguntas from '../Components/QuizPerguntas'
+import QuizResultado from '../Components/QuizResultado'
 
 class QuizView extends Component {
 
@@ -71,15 +72,30 @@ class QuizView extends Component {
         }))
     }
 
+    recomecarQuiz = () => {
+        this.setState({
+            qtdQuestionado: 0,
+            pergunta: '',
+            resposta: '',
+            exibirPergunta: true,
+            qtdCorreta: 0,
+            exibirResultado: false
+        }, () => this.proximaPergunta())
+    }
+
     render() {
 
-        const { qtdQuestionado, perguntas, pergunta, resposta, exibirPergunta, exibirResultado } = this.state
+        const { qtdQuestionado, perguntas, pergunta, resposta, exibirPergunta, exibirResultado, qtdCorreta } = this.state
 
         return (
             <View>
                 {
                     (exibirResultado) ?
-                        <Text></Text> :
+                        <QuizResultado
+                            qtdAcertos={qtdCorreta}
+                            qtdTotal={perguntas.length}
+                            recomecarQuiz={this.recomecarQuiz}
+                            voltarBaralho={() => this.props.navigation.goBack(null)} /> :
                         <QuizPerguntas
                             qtdQuestionado={qtdQuestionado}
                             qtdPerguntas={perguntas.length}
