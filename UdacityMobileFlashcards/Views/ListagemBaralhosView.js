@@ -12,14 +12,13 @@ class ListagemBaralhosView extends Component {
     }
 
     componentDidMount() {
-
-        consultarBaralhos((baralhos) => {
-
-            this.setState({
-                Baralhos: baralhos ? JSON.parse(baralhos) : {}
-            })
+        this.willFocus = this.props.navigation.addListener('willFocus', () => {
+            consultarBaralhos((baralhos) => {
+                this.setState({
+                    Baralhos: baralhos ? JSON.parse(baralhos) : {}
+                })
+            }).then(() => this.setState({ carregado: true }))
         })
-            .then(() => this.setState({ carregado: true }))
     }
 
     exibirBaralho = (id) => {
