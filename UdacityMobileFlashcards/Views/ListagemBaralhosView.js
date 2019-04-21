@@ -7,14 +7,16 @@ import { consultarBaralhos } from '../Utils/API'
 class ListagemBaralhosView extends Component {
 
     state = {
-        Baralhos: [],
+        Baralhos: {},
         carregado: false
     }
 
     componentDidMount() {
+
         consultarBaralhos((baralhos) => {
+
             this.setState({
-                Baralhos: baralhos || []
+                Baralhos: baralhos ? JSON.parse(baralhos) : {}
             })
         })
             .then(() => this.setState({ carregado: true }))
@@ -26,19 +28,22 @@ class ListagemBaralhosView extends Component {
 
     render() {
 
+        const { Baralhos } = this.state
+
         if (this.state.carregado === false) {
             return <AppLoading />
         }
 
         return (
+
             <View style={styles.container}>
                 <Button onPress={() => this.props.navigation.navigate('NovoBaralho')} title="Novo Baralho" />
                 {
-                    (this.state.Baralhos.length === 0) ? (
+                    (Object.keys(Baralhos).length === 0) ? (
                         <Text style={styles.nenhumCadastrado}>Nenhum baralho cadastrado.</Text>
                     ) :
-                        this.state.Baralhos.map((baralho) => {
-                            return <Baralho key={baralho.id} dados={baralho} exibirBaralho={() => this.exibirBaralho} />
+                        Object.keys(Baralhos).map((id) => {
+                            return <Baralho key={id} dados={Baralhos[id]} exibirBaralho={() => this.exibirBaralho} />
                         })
                 }
             </View>

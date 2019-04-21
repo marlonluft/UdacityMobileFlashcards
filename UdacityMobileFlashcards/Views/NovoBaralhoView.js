@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
+import { salvarBaralho } from '../Utils/API'
 
 class NovoBaralhoView extends Component {
 
@@ -10,11 +11,26 @@ class NovoBaralhoView extends Component {
     salvar = () => {
 
         // Validar titulo do baralho
+        if (!this.state.tituloBaralho) {
+            console.log('Hey informe um título do baralho para continuar')
+        }
+        else {
 
-        // salvar novo baralho
+            let baralho = {
+                descricao: this.state.tituloBaralho,
+                qtdPerguntas: 0
+            }
 
-        // Redirecionar
-        this.props.navigation.navigate('Listagem')
+            // salvar novo baralho
+            salvarBaralho(baralho).then((retorno) => {
+
+                console.log('retorno')
+                console.log(retorno)
+
+                // Redirecionar
+                this.props.navigation.navigate('Listagem')
+            })
+        }
     }
 
     render() {
