@@ -1,27 +1,23 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Button } from 'react-native'
+import { View, StyleSheet, Button, Text } from 'react-native'
 import Baralho from '../Components/Baralho'
+import { AppLoading } from 'expo'
+import { consultarBaralhos } from '../Utils/API'
 
 class ListagemBaralhosView extends Component {
 
     state = {
-        Baralhos: [
-            {
-                id: 0,
-                descricao: 'Baralho0',
-                qtdPerguntas: 0
-            },
-            {
-                id: 1,
-                descricao: 'Baralho1',
-                qtdPerguntas: 1
-            },
-            {
-                id: 2,
-                descricao: 'Baralho2',
-                qtdPerguntas: 2
-            }
-        ]
+        Baralhos: [],
+        carregado: false
+    }
+
+    componentDidMount() {
+        consultarBaralhos((baralhos) => {
+            this.setState({
+                Baralhos: baralhos || []
+            })
+        })
+            .then(() => this.setState({ carregado: true }))
     }
 
     exibirBaralho = (id) => {
@@ -29,13 +25,21 @@ class ListagemBaralhosView extends Component {
     }
 
     render() {
+
+        if (this.state.carregado === false) {
+            return <AppLoading />
+        }
+
         return (
             <View style={styles.container}>
                 <Button onPress={() => this.props.navigation.navigate('NovoBaralho')} title="Novo Baralho" />
                 {
-                    this.state.Baralhos.map((baralho) => {
-                        return <Baralho key={baralho.id} dados={baralho} exibirBaralho={() => this.exibirBaralho} />
-                    })
+                    (this.state.Baralhos.length === 0) ? (
+                        <Text style={styles.nenhumCadastrado}>Nenhum baralho cadastrado.</Text>
+                    ) :
+                        this.state.Baralhos.map((baralho) => {
+                            return <Baralho key={baralho.id} dados={baralho} exibirBaralho={() => this.exibirBaralho} />
+                        })
                 }
             </View>
         )
@@ -47,6 +51,10 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 0,
         backgroundColor: 'white'
+    },
+    nenhumCadastrado: {
+        textAlign: 'center',
+        color: 'gray'
     }
 })
 
