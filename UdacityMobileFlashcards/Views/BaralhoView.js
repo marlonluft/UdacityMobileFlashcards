@@ -1,28 +1,49 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Button } from 'react-native'
+import { consultarBaralho } from '../Utils/API'
+import { AppLoading } from 'expo'
 
 class BaralhoView extends Component {
 
     state = {
         descricao: '',
         qtdPerguntas: 0,
-        id: -1
+        id: '',
+        carregado: false
+    }
+
+    atualizarComponente = () => {
+        consultarBaralho(this.state.id, (retorno) => {
+            this.setState({
+                descricao: retorno.descricao,
+                qtdPerguntas: retorno.qtdPerguntas,
+                carregado: true
+            })
+        })
     }
 
     componentDidMount() {
-        const { baralhoObj } = this.props.navigation.state.params
+
+        const { baralhoId } = this.props.navigation.state.params
 
         this.setState({
-            descricao: baralhoObj.descricao,
-            qtdPerguntas: baralhoObj.qtdPerguntas,
-            id: baralhoObj.id
-        })
+            id: baralhoId
+        }, () => {
+            // Registra para que quando a tela for carregada de novo a mesma seja atualizada, pois 'componentDidMount' não será invocado
+            this.props.navigation.addListener('willFocus', () => this.atualizarComponente())
 
+            // Recupera os dados do baralho para exibição
+            this.atualizarComponente()
+        })
     }
 
     render() {
 
         const { descricao, qtdPerguntas, id } = this.state
+
+        if (this.state.carregado === false) {
+            return <AppLoading />
+        }
 
         return (
 
