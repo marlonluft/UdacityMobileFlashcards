@@ -2,7 +2,7 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import ListagemBaralhosView from './Views/ListagemBaralhosView.js'
 import NovoBaralhoView from './Views/NovoBaralhoView.js'
 import BaralhoView from './Views/BaralhoView.js'
-import NovaPerguntaView from './Views/NovaPerguntaView.js'
+import NovaCartaView from './Views/NovaCartaView.js'
 import QuizView from './Views/QuizView.js'
 
 const AppNavigator = createStackNavigator({
@@ -19,9 +19,9 @@ const AppNavigator = createStackNavigator({
     }),    
   },
   NovaPergunta: {
-    screen: NovaPerguntaView,
+    screen: NovaCartaView,
     navigationOptions: () => ({
-      title: 'Nova Pergunta',
+      title: 'Nova Carta',
     })
   },
   NovoBaralho: {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
 import { salvarPergunta } from '../Utils/API'
 
-class NovaPerguntaView extends Component {
+class NovaCartaView extends Component {
 
     state = {
         pergunta: '',
@@ -48,7 +48,7 @@ class NovaPerguntaView extends Component {
 
         return (
             <View>
-                <Text>Qual será a nova pergunta?</Text>
+                <Text>Qual será a pergunta?</Text>
                 <TextInput
                     style={styles.inputTitulo}
                     onChangeText={(pergunta) => this.setState({ pergunta })}
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default NovaPerguntaView
+export default NovaCartaView
