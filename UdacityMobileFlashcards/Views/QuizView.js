@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Button } from 'react-native'
 import { consultarPerguntas } from '../Utils/API'
+import Quiz from '../Components/Quiz'
 
 class QuizView extends Component {
 
@@ -50,11 +51,16 @@ class QuizView extends Component {
             }))
         }
 
-        if (this.state.qtdQuestionado < this.state.perguntas.length)
-        {
+        if (this.state.qtdQuestionado < this.state.perguntas.length) {
             // Mostra a próxima pergunta
             this.proximaPergunta()
         }
+    }
+
+    alterarExibicao = () => {
+        this.setState(oldstate => ({
+            exibirPergunta: !oldstate.exibirPergunta
+        }))
     }
 
     render() {
@@ -63,17 +69,14 @@ class QuizView extends Component {
 
         return (
             <View>
-                <Text>{qtdQuestionado + '/' + perguntas.length}</Text>
-                {
-                    exibirPergunta ?
-                        <Text style={{}}>{pergunta}</Text>
-                        : <Text>{resposta}</Text>
-                }
-
-                <Button onPress={() => this.setState({ exibirPergunta: !exibirPergunta })} title={exibirPergunta ? 'Exibir Resposta' : 'Exibir Pergunta'} />
-
-                <Button disabled={exibirPergunta} onPress={() => this.alterarPontuacao(true)} title="Correta" />
-                <Button disabled={exibirPergunta} onPress={() => this.alterarPontuacao(false)} title="Incorreta" />
+                <Quiz
+                    qtdQuestionado={qtdQuestionado}
+                    qtdPerguntas={perguntas.length}
+                    exibirPergunta={exibirPergunta}
+                    pergunta={pergunta}
+                    resposta={resposta}
+                    alterarPontuacao={this.alterarPontuacao}
+                    alterarExibicao={this.alterarExibicao} />
             </View>
         )
     }
