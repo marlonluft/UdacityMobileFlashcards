@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button } from 'react-native'
 import { consultarCartas } from '../Utils/API'
 import QuizPerguntas from '../Components/QuizPerguntas'
 import QuizResultado from '../Components/QuizResultado'
+import { limparNotificacoesLocais } from '../Utils/Helper'
 
 class QuizView extends Component {
 
@@ -63,6 +64,9 @@ class QuizView extends Component {
                 exibirResultado: true
             })
 
+            // Limpa as notificações de lembrete para estudo de hoje e após
+            // Agenda as notificações de lembrete para estudo para amanhã
+            limparNotificacoesLocais().then(setarNotificacaoLocal)
         }
     }
 

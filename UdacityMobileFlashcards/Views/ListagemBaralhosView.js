@@ -3,6 +3,7 @@ import { View, StyleSheet, Button, Text } from 'react-native'
 import Baralho from '../Components/Baralho'
 import { AppLoading } from 'expo'
 import { consultarBaralhos } from '../Utils/API'
+import { setarNotificacaoLocal } from '../Utils/Helper'
 
 class ListagemBaralhosView extends Component {
 
@@ -12,6 +13,7 @@ class ListagemBaralhosView extends Component {
     }
 
     componentDidMount() {
+        // Carrega a lista de baralhos
         this.props.navigation.addListener('willFocus', () => {
             consultarBaralhos((baralhos) => {
                 this.setState({
@@ -19,6 +21,9 @@ class ListagemBaralhosView extends Component {
                 })
             }).then(() => this.setState({ carregado: true }))
         })
+
+        // Agenda as notificações de lembrete para estudo para amanhã
+        setarNotificacaoLocal()
     }
 
     exibirBaralho = (baralhoId) => {
