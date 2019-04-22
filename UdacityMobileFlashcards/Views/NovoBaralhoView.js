@@ -23,7 +23,7 @@ class NovoBaralhoView extends Component {
             }
 
             // salvar novo baralho e redireciona para tela de listagem
-            salvarBaralho(baralho).then(() => this.props.navigation.navigate('Listagem'))
+            salvarBaralho(baralho).then((baralhoId) => this.props.navigation.navigate('Baralho', { baralhoId }))
         }
     }
 
