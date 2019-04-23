@@ -59,14 +59,14 @@ class NovaCartaView extends Component {
 
         return (
             <View style={defaultStyles.container}>
-                <Text style={styles.pergunta}>Qual será a pergunta?</Text>
+                <Text style={defaultStyles.texto}>Qual será a pergunta?</Text>
                 <TextInput
                     style={defaultStyles.textInput}
                     onChangeText={(pergunta) => this.setState({ pergunta })}
                     value={this.state.pergunta}
                 />
 
-                <Text style={styles.pergunta}>Qual será a resposta da pergunta?</Text>
+                <Text style={defaultStyles.texto}>Qual será a resposta da pergunta?</Text>
                 <TextInput
                     style={defaultStyles.textInput}
                     onChangeText={(resposta) => this.setState({ resposta })}
@@ -80,13 +80,5 @@ class NovaCartaView extends Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    pergunta: {
-        textAlign: 'left',
-        fontSize: 18,
-        marginTop: 10,
-    },
-})
 
 export default NovaCartaView

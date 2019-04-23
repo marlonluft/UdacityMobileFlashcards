@@ -25,5 +25,10 @@ export default defaultStyles = StyleSheet.create({
     textInput: {
         borderColor: '#A6A7A8',
         borderBottomWidth: 1,
-    }
+    },
+    texto: {
+        textAlign: 'left',
+        fontSize: 18,
+        marginTop: 10,
+    },
 })
