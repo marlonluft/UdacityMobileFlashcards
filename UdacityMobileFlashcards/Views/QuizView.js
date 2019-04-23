@@ -57,7 +57,7 @@ class QuizView extends Component {
 
         if (this.state.qtdQuestionado < this.state.cartas.length) {
             // Mostra a próxima pergunta
-            this.proximaPergunta()
+            this.proximaCarta()
         }
         else {
             // Exibe o resultado do quiz
