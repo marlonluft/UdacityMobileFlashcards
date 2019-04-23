@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Button, Alert } from 'react-native'
 import { salvarBaralho } from '../Utils/API'
 
 class NovoBaralhoView extends Component {
@@ -12,7 +12,14 @@ class NovoBaralhoView extends Component {
 
         // Validar titulo do baralho
         if (!this.state.tituloBaralho || this.state.tituloBaralho.length < 3) {
-            console.log('Hey informe um título do baralho com pelo menos 3 caracteres para continuar')
+            Alert.alert(
+                'Ops...',
+                'Informe um título do baralho com pelo menos 3 caracteres para continuar',
+                [
+                    { text: 'OK' },
+                ],
+                { cancelable: false },
+            );
         }
         else {
 
