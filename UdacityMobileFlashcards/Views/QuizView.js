@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Button } from 'react-native'
+import { View } from 'react-native'
 import { consultarCartas } from '../Utils/API'
 import QuizPerguntas from '../Components/QuizPerguntas'
 import QuizResultado from '../Components/QuizResultado'
 import { limparNotificacoesLocais } from '../Utils/Helper'
+import defaultStyles from '../Utils/Style'
 
 class QuizView extends Component {
 
@@ -92,7 +93,7 @@ class QuizView extends Component {
         const { qtdQuestionado, cartas, pergunta, resposta, exibirPergunta, exibirResultado, qtdCorreta } = this.state
 
         return (
-            <View>
+            <View style={defaultStyles.container}>
                 {
                     (exibirResultado) ?
                         <QuizResultado
