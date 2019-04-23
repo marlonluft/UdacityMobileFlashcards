@@ -12,6 +12,12 @@ export default defaultStyles = StyleSheet.create({
         padding: 10,
         marginVertical: 10,
     },
+    touchableOpacityDisabled: {
+        alignItems: 'center',
+        backgroundColor: '#D4D5D7',
+        padding: 10,
+        marginVertical: 10,
+    },
     touchableOpacityText: {
         color: '#FFFFFF',
         fontWeight: 'bold',

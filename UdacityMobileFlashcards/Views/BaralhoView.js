@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Button } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { consultarBaralho } from '../Utils/API'
 import { AppLoading } from 'expo'
+import defaultStyles from '../Utils/Style'
 
 class BaralhoView extends Component {
 
@@ -47,20 +48,28 @@ class BaralhoView extends Component {
 
         return (
 
-            <View style={styles.container}>
+            <View style={defaultStyles.container}>
                 <Text style={styles.descricao}>{descricao}</Text>
                 <Text style={styles.cartas}>{qtdCartas > 0 ? qtdCartas + ' carta(s)' : 'Nenhuma carta cadastrada'}</Text>
-                <Button onPress={() => this.props.navigation.navigate('NovaCarta', { id })} title="Nova Carta" />
-                <Button disabled={qtdCartas === 0} onPress={() => this.props.navigation.navigate('Quiz', { id })} title="Começar Quiz" />
+
+                <TouchableOpacity
+                    style={defaultStyles.touchableOpacity}
+                    onPress={() => this.props.navigation.navigate('NovaCarta', { id })}>
+                    <Text style={defaultStyles.touchableOpacityText}>Nova Carta</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={qtdCartas === 0 ? defaultStyles.touchableOpacityDisabled : defaultStyles.touchableOpacity}
+                    disabled={qtdCartas === 0}
+                    onPress={() => this.props.navigation.navigate('Quiz', { id })}>
+                    <Text style={defaultStyles.touchableOpacityText}>Começar Quiz</Text>
+                </TouchableOpacity>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
     descricao: {
         textAlign: 'center',
         fontWeight: 'bold',
@@ -68,7 +77,7 @@ const styles = StyleSheet.create({
     },
     cartas: {
         textAlign: 'center',
-        fontSize: 20,
+        fontSize: 18,
         color: 'gray'
     }
 })
