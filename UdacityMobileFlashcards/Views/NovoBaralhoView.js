@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TextInput, Button, Alert } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native'
 import { salvarBaralho } from '../Utils/API'
+import defaultStyles from '../Utils/Style'
 
 class NovoBaralhoView extends Component {
 
@@ -36,16 +37,18 @@ class NovoBaralhoView extends Component {
 
     render() {
         return (
-            <View>
+            <View style={defaultStyles.container}>
                 <Text style={styles.tituloBaralho}>Qual o título do seu novo baralho?</Text>
 
                 <TextInput
-                    style={styles.inputTitulo}
+                    style={defaultStyles.textInput}
                     onChangeText={(tituloBaralho) => this.setState({ tituloBaralho })}
                     value={this.state.tituloBaralho}
                 />
 
-                <Button onPress={this.salvar} title="Salvar" />
+                <TouchableOpacity style={defaultStyles.touchableOpacity} onPress={this.salvar}>
+                    <Text style={defaultStyles.touchableOpacityText}>Salvar</Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -56,11 +59,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 28,
-    },
-    inputTitulo: {
-        height: 20,
-        borderColor: 'gray',
-        borderWidth: 1
     }
 })
 
