@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { consultarCartas } from '../Utils/API'
 import QuizPerguntas from '../Components/QuizPerguntas'
 import QuizResultado from '../Components/QuizResultado'
-import { limparNotificacoesLocais } from '../Utils/Helper'
+import { limparNotificacoesLocais, setarNotificacaoLocal } from '../Utils/Helper'
 import defaultStyles from '../Utils/Style'
 
 class QuizView extends Component {
