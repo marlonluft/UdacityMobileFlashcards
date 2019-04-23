@@ -6,14 +6,15 @@ export default defaultStyles = StyleSheet.create({
         paddingHorizontal: 10,
         backgroundColor: 'white'
     },
-    nenhumCadastrado: {
-        textAlign: 'center',
-        color: 'gray'
-    },
-    button: {
+    touchableOpacity: {
         alignItems: 'center',
-        backgroundColor: '#DDDDDD',
+        backgroundColor: '#0077FF',
         padding: 10,
-        marginVertical: 10,
+        marginVertical: 10,        
+    },
+    touchableOpacityText: {
+        color: '#FFFFFF',
+        fontWeight: 'bold',
     }
+    
 })

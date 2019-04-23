@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Button, Text, FlatList } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Text, FlatList } from 'react-native'
 import Baralho from '../Components/Baralho'
 import { AppLoading } from 'expo'
 import { consultarBaralhos } from '../Utils/API'
 import { setarNotificacaoLocal } from '../Utils/Helper'
+import defaultStyles from '../Utils/Style'
 
 class ListagemBaralhosView extends Component {
 
@@ -46,8 +47,10 @@ class ListagemBaralhosView extends Component {
 
         return (
 
-            <View style={styles.container}>
-                <Button onPress={() => this.props.navigation.navigate('NovoBaralho')} title="Novo Baralho" />
+            <View style={defaultStyles.container}>
+                <TouchableOpacity style={defaultStyles.touchableOpacity} onPress={() => this.props.navigation.navigate('NovoBaralho')}>
+                    <Text style={defaultStyles.touchableOpacityText}>Novo Baralho</Text>
+                </TouchableOpacity>
                 {
                     Baralhos.length === 0 ? (
                         <Text style={styles.nenhumCadastrado}>Nenhum baralho cadastrado.</Text>
@@ -64,11 +67,6 @@ class ListagemBaralhosView extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 0,
-        backgroundColor: 'white'
-    },
     nenhumCadastrado: {
         textAlign: 'center',
         color: 'gray'
