@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 export default defaultStyles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 10,
+        padding: 10,
         backgroundColor: 'white'
     },
     touchableOpacity: {

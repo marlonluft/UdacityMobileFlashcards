@@ -38,7 +38,7 @@ class NovoBaralhoView extends Component {
     render() {
         return (
             <View style={defaultStyles.container}>
-                <Text style={styles.tituloBaralho}>Qual o título do seu novo baralho?</Text>
+                <Text style={styles.pergunta}>Qual o título do seu novo baralho?</Text>
 
                 <TextInput
                     style={defaultStyles.textInput}
@@ -55,11 +55,11 @@ class NovoBaralhoView extends Component {
 }
 
 const styles = StyleSheet.create({
-    tituloBaralho: {
-        textAlign: 'center',
-        fontWeight: 'bold',
-        fontSize: 28,
-    }
+    pergunta: {
+        textAlign: 'left',
+        fontSize: 18,
+        marginTop: 5,
+    },
 })
 
 export default NovoBaralhoView

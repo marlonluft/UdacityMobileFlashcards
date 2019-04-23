@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TextInput, Button, Alert } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native'
 import { salvarCarta } from '../Utils/API'
+import defaultStyles from '../Utils/Style'
 
 class NovaCartaView extends Component {
 
@@ -57,33 +58,35 @@ class NovaCartaView extends Component {
     render() {
 
         return (
-            <View>
-                <Text>Qual será a pergunta?</Text>
+            <View style={defaultStyles.container}>
+                <Text style={styles.pergunta}>Qual será a pergunta?</Text>
                 <TextInput
-                    style={styles.inputTitulo}
+                    style={defaultStyles.textInput}
                     onChangeText={(pergunta) => this.setState({ pergunta })}
                     value={this.state.pergunta}
                 />
 
-                <Text>Qual será a resposta da pergunta?</Text>
+                <Text style={styles.pergunta}>Qual será a resposta da pergunta?</Text>
                 <TextInput
-                    style={styles.inputTitulo}
+                    style={defaultStyles.textInput}
                     onChangeText={(resposta) => this.setState({ resposta })}
                     value={this.state.resposta}
                 />
 
-                <Button onPress={this.salvar} title="Salvar" />
+                <TouchableOpacity style={defaultStyles.touchableOpacity} onPress={this.salvar}>
+                    <Text style={defaultStyles.touchableOpacityText}>Salvar</Text>
+                </TouchableOpacity>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    inputTitulo: {
-        height: 20,
-        borderColor: 'gray',
-        borderWidth: 1
-    }
+    pergunta: {
+        textAlign: 'left',
+        fontSize: 18,
+        marginTop: 10,
+    },
 })
 
 export default NovaCartaView
