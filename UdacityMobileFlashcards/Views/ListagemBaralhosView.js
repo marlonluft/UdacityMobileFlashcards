@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Button, Text } from 'react-native'
+import { View, StyleSheet, Button, Text, FlatList } from 'react-native'
 import Baralho from '../Components/Baralho'
 import { AppLoading } from 'expo'
 import { consultarBaralhos } from '../Utils/API'
@@ -16,8 +16,14 @@ class ListagemBaralhosView extends Component {
         // Carrega a lista de baralhos
         this.props.navigation.addListener('willFocus', () => {
             consultarBaralhos((baralhos) => {
+
+                baralhos = baralhos || {}
+                baralhos = Object.keys(baralhos).map((id) => {
+                    return baralhos[id]
+                })
+
                 this.setState({
-                    Baralhos: baralhos || {}
+                    Baralhos: baralhos
                 })
             }).then(() => this.setState({ carregado: true }))
         })
@@ -43,12 +49,14 @@ class ListagemBaralhosView extends Component {
             <View style={styles.container}>
                 <Button onPress={() => this.props.navigation.navigate('NovoBaralho')} title="Novo Baralho" />
                 {
-                    (Object.keys(Baralhos).length === 0) ? (
+                    Baralhos.length === 0 ? (
                         <Text style={styles.nenhumCadastrado}>Nenhum baralho cadastrado.</Text>
                     ) :
-                        Object.keys(Baralhos).map((id) => {
-                            return <Baralho key={id} dados={Baralhos[id]} exibirBaralho={this.exibirBaralho} />
-                        })
+                        <FlatList
+                            data={Baralhos}
+                            renderItem={({ item }) => <Baralho key={item.id} dados={item} exibirBaralho={this.exibirBaralho} />}
+                            keyExtractor={(item) => item.id.toString()}
+                        />
                 }
             </View>
         )
