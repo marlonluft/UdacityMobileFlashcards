@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Button, Alert } from 'react-native'
 import { salvarCarta } from '../Utils/API'
 
 class NovaCartaView extends Component {
@@ -24,10 +24,20 @@ class NovaCartaView extends Component {
 
         // Validar os dados
         if (!pergunta || pergunta.length < 3) {
-            console.log('Hey informe uma pergunta com pelo menos 3 caracteres para continuar')
+            Alert.alert(
+                'Ops...',
+                'Informe uma pergunta com pelo menos 3 caracteres para continuar',
+                [{ text: 'OK' }],
+                { cancelable: false },
+            )
         }
         else if (!resposta || pergunta.length < 1) {
-            console.log('Hey informe uma resposta com pelo menos 1 caracter para continuar')
+            Alert.alert(
+                'Ops...',
+                'Informe uma resposta com pelo menos 1 caracter para continuar',
+                [{ text: 'OK' }],
+                { cancelable: false },
+            )
         }
         else {
 

@@ -19,7 +19,7 @@ class NovoBaralhoView extends Component {
                     { text: 'OK' },
                 ],
                 { cancelable: false },
-            );
+            )
         }
         else {
 
