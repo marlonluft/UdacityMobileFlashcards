@@ -12,8 +12,8 @@
     "expo-permissions": "~9.3.0",
     "react": "^16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
-    "react-native-gesture-handler": "~1.7.0",
-    "react-native-screens": "~2.10.1",
+    "react-native-gesture-handler": "^1.7.0",
+    "react-native-screens": "^2.10.1",
     "react-navigation": "^3.13.0",
     "react-redux": "^7.0.2",
     "redux": "^4.0.1"
